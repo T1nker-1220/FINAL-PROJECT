@@ -1,6 +1,6 @@
 import requests
 
-# Your API Ninjas API key (without leading slashes)
+# Your API Ninjas API key
 api_key = "vTftsNwDaweVZNqQLyePw==nYcCW3NVHxLYnUNw"
 
 # Latitude and longitude for the request
@@ -28,10 +28,7 @@ if response.status_code == 200:
     humidity = data.get('humidity', 'No humidity data available')
     
     # Check for weather description
-    if 'weather' in data and isinstance(data['weather'], list) and len(data['weather']) > 0:
-        description = data['weather'][0]['description']
-    else:
-        description = "No weather description available"
+    description = data.get('weather', {}).get('description', "No weather description available")
 
     # Print the weather information
     print(f"Temperature: {temp}°C")

@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 import requests
+import os
+print(os.getcwd())
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Your API Ninjas API key (without leading slashes)
 api_key = "vTftsNwDaweVZNqQLyePw==nYcCW3NVHxLYnUNw"
@@ -16,8 +18,10 @@ def home():
         # Fetch weather data
         weather_data = get_weather(latitude, longitude)
 
-    return render_template('index.html', weather=weather_data)  # Correctly passing weather_data
+        # Print the weather data to the terminal for debugging
+        print("Weather Data:", weather_data)
 
+    return render_template('index.html', weather=weather_data)
 
 @app.route('/get_weather', methods=['GET'])
 def get_weather_api():

@@ -4,28 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link rel="stylesheet" href="style.css"> <!-- Corrected link to CSS file -->
 </head>
 <body>
-    <h1>Weather App</h1>
-    <form method="POST">
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" required>
-        <br>
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" required>
-        <br>
-        <button type="submit">Get Weather</button>
-    </form>
+    <div class="weather-container">
+        <h1>Weather Info</h1>
 
-    {% if weather %}
-        <h2>Weather Information:</h2>
-        {% if weather.error %}
-            <p style="color: red;">{{ weather.error }}</p>
-        {% else %}
-            <p>Temperature: {{ weather.temp }}°C</p>
-            <p>Humidity: {{ weather.humidity }}%</p>
-            <p>Weather: {{ weather.description }}</p>
-        {% endif %}
-    {% endif %}
+        <!-- Weather Icon -->
+        <img src="R.png" alt="Weather Icon" class="weather-icon"> <!-- Ensure R.png exists in your project -->
+
+        <!-- Input Fields for Latitude and Longitude -->
+        <form method="POST" action="/">
+            <input type="text" name="latitude" placeholder="Enter Latitude" required>
+            <input type="text" name="longitude" placeholder="Enter Longitude" required>
+            <button type="submit">Get Weather</button>
+        </form>        
+
+        <!-- Weather Information -->
+        <div class="weather-info">
+            {% if weather %}
+                <p class="temperature">{{ weather.temp }}°C</p>
+                <p class="humidity">Humidity: {{ weather.humidity }}%</p>
+                <p class="description">{{ weather.description }}</p>
+            {% else %}
+                <p>Please enter coordinates to get weather data.</p>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Powered by API Ninjas
+        </div>
+    </div>
+
+    <script src="click.js"></script> <!-- Ensure this script exists if used -->
 </body>
 </html>

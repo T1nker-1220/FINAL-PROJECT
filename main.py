@@ -4,7 +4,7 @@ import requests
 api_key = "vTftsNwDaweVZNqQLyePw==nYcCW3NVHxLYnUNw"
 
 # Latitude and longitude for the request
-latitude = "14.599512" 
+latitude = "14.6042" 
 longitude = "120.984222"  
 
 # Complete URL with latitude and longitude

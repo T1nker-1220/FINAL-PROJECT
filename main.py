@@ -1,22 +1,17 @@
 import requests
 
-# Your API Ninjas API key
-api_key = "vTftsNwDaweVZNqQLyePw==nYcCW3NVHxLYnUNw"
+# Your OpenWeatherMap API key
+api_key = "50109a24ba32ed4b775a064f1fb11237"
 
 # Latitude and longitude for the request
 latitude = "14.6042" 
 longitude = "120.984222"  
 
-# Complete URL with latitude and longitude
-complete_url = f"https://api.api-ninjas.com/v1/weather?lon={longitude}&lat={latitude}"
-
-# Headers with API key
-headers = {
-    'X-Api-Key': api_key 
-}
+# Complete URL with latitude and longitude for OpenWeatherMap
+complete_url = f"http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units=metric"
 
 # Make the request
-response = requests.get(complete_url, headers=headers)
+response = requests.get(complete_url)
 
 # Check response status and process data
 if response.status_code == 200:
@@ -24,11 +19,11 @@ if response.status_code == 200:
     
     print("Response Data:", data)
 
-    temp = data.get('temp', 'No temperature data available')
-    humidity = data.get('humidity', 'No humidity data available')
+    temp = data.get('main', {}).get('temp', 'No temperature data available')
+    humidity = data.get('main', {}).get('humidity', 'No humidity data available')
     
-    # Check for weather description (correct field is 'conditions' not 'weather')
-    description = data.get('conditions', "No weather description available")
+    # Check for weather description
+    description = data.get('weather', [{}])[0].get('description', "No weather description available")
 
     # Print the weather information
     print(f"Temperature: {temp}°C")

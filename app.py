@@ -11,25 +11,14 @@ api_key = "50109a24ba32ed4b775a064f1fb11237"
 def home():
     weather_data = {}
     if request.method == 'POST':
-        latitude = request.form['latitude']
-        longitude = request.form['longitude']
-        
-        # Fetch weather data
-        weather_data = get_weather(latitude, longitude)
+        city = request.form['city']  # Get city name from the form
+        weather_data = get_weather(city)
 
     return render_template('index.html', weather=weather_data)
 
-@app.route('/get_weather', methods=['GET'])
-def get_weather_api():
-    latitude = request.args.get('lat')
-    longitude = request.args.get('lon')
-    
-    weather_data = get_weather(latitude, longitude)
-    return jsonify(weather_data)
-
-def get_weather(latitude, longitude):
-    # Complete URL with latitude and longitude for OpenWeatherMap
-    complete_url = f"http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units=metric"
+def get_weather(city):
+    # Complete URL with city name
+    complete_url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 
     # Make the request to the API
     response = requests.get(complete_url)
@@ -46,7 +35,6 @@ def get_weather(latitude, longitude):
         print(json.dumps(data, indent=4))
         return weather
     else:
-        print(f"Error fetching weather data: {response.status_code}, {response.text}")
         return {}
 
 if __name__ == '__main__':

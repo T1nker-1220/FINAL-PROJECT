@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Linking the stylesheet from the static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="weather-container">
         <h1>Weather Info</h1>
 
         <!-- Weather Icon -->
-        <img src="R.png" alt="Weather Icon" class="weather-icon">
+        <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
         <!-- Input Fields for Latitude and Longitude -->
         <form method="POST" action="/">

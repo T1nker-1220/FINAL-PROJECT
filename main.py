@@ -27,8 +27,8 @@ if response.status_code == 200:
     temp = data.get('temp', 'No temperature data available')
     humidity = data.get('humidity', 'No humidity data available')
     
-    # Check for weather description
-    description = data.get('weather', {}).get('description', "No weather description available")
+    # Check for weather description (correct field is 'conditions' not 'weather')
+    description = data.get('conditions', "No weather description available")
 
     # Print the weather information
     print(f"Temperature: {temp}°C")

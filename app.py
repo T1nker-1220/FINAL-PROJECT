@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request, jsonify
 import requests
 
@@ -12,7 +13,7 @@ def home():
     if request.method == 'POST':
         latitude = request.form['latitude']
         longitude = request.form['longitude']
-        
+
         # Fetch weather data
         weather_data = get_weather(latitude, longitude)
 
@@ -35,20 +36,28 @@ def get_weather(latitude, longitude):
         'X-Api-Key': api_key
     }
 
-    # Make the request
+    # Make the request to the API
     response = requests.get(complete_url, headers=headers)
 
     # Convert response data to JSON
     if response.status_code == 200:
         data = response.json()
+        # Extract the necessary weather details
         weather = {
             'temp': data.get('temp', 'No temperature data available'),
             'humidity': data.get('humidity', 'No humidity data available'),
-            'description': data.get('weather', [{}])[0].get('description', 'No weather description available')
+            'description': data.get('conditions', 'No weather description available')
         }
+        
+        print(json.dumps(data, indent=4))  # For debugging purpose
         return weather
     else:
-        return {'error': f"Error fetching data: {response.status_code}, {response.text}"}
+        print(f"Error fetching weather data: {response.status_code}")
+        return {
+            'temp': 'N/A',
+            'humidity': 'N/A',
+            'description': 'Failed to retrieve weather data'
+        }
 
 if __name__ == '__main__':
     app.run(debug=True)

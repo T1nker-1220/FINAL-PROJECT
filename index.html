@@ -4,39 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css"> <!-- Corrected link to CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="weather-container">
         <h1>Weather Info</h1>
 
         <!-- Weather Icon -->
-        <img src="R.png" alt="Weather Icon" class="weather-icon"> <!-- Ensure R.png exists in your project -->
+        <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
-        <!-- Input Fields for Latitude and Longitude -->
+        <!-- Input Field for City Name -->
         <form method="POST" action="/">
-            <input type="text" name="latitude" placeholder="Enter Latitude" required>
-            <input type="text" name="longitude" placeholder="Enter Longitude" required>
+            <input type="text" name="city" placeholder="Enter City" required>
             <button type="submit">Get Weather</button>
-        </form>        
+        </form>
 
         <!-- Weather Information -->
         <div class="weather-info">
-            {% if weather %}
+            {% if weather and weather.temp is not none %}
                 <p class="temperature">{{ weather.temp }}°C</p>
                 <p class="humidity">Humidity: {{ weather.humidity }}%</p>
-                <p class="description">{{ weather.description }}</p>
+                <p class="description">Weather: {{ weather.description }}</p>
             {% else %}
-                <p>Please enter coordinates to get weather data.</p>
+                <p>Please enter a city name to get weather data.</p>
             {% endif %}
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            Powered by API Ninjas
+            Powered by Open Weather Map
         </div>
     </div>
-
-    <script src="click.js"></script> <!-- Ensure this script exists if used -->
 </body>
 </html>

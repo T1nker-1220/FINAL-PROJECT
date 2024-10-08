@@ -12,11 +12,19 @@ body {
     background-position: center;
     height: 100vh;
     display: flex;
-    justify-content: flex-start; /* Align children to the start (left) */
+    justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 18px;
-    overflow: hidden;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    justify-content: space-between; /* Space between child elements */
+    align-items: center; /* Align items vertically in the center */
+    width: 100%;
+    max-width: 1200px; /* Max width for the layout */
+    margin: 0 auto; /* Center the container */
 }
 
 /* Weather Container */
@@ -25,142 +33,76 @@ body {
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(15px); /* Stronger blur effect */
+    backdrop-filter: blur(15px);
     max-width: 450px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
-    margin-left: 20px; /* Add some margin to the left for spacing */
 }
 
-/* Weather Widget */
-.weather-widget {
-    width: 100%; /* Make the widget take full width */
-    max-width: 350px; /* Limit the width to give it a portrait feel */
-    margin-left: 20px; /* Move the widget to the left of the container */
-    display: flex; /* Use flexbox to align items */
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-start; /* Align items to the left */
-    padding: 10px; /* Add some padding */
-    background: rgba(255, 255, 255, 0.2); /* Light background for the widget */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+/* Widget Container */
+.widget-container {
+    flex: 1; /* Allow widget container to grow */
+    max-width: 200px; /* Fixed width for the widget */
 }
 
-/* Weather Info Heading */
-.weather-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #8be9fd; /* Light blue for the heading */
-    animation: pulse 2s infinite;
+/* Weather Map */
+.weather-map {
+    max-width: 400px; /* Fixed width for the map */
 }
 
-/* Weather Info Paragraphs */
-.weather-info p {
-    margin: 10px 0;
-    font-size: 1.2rem;
-}
-
-.temperature {
-    font-size: 4rem;
-    font-weight: bold;
-    margin: 20px 0;
-    background: linear-gradient(135deg, #34e89e, #0f3443); /* Green and blue gradient text */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: bounceIn 2s ease-in-out;
-}
-
-/* Input and Submit Button Styles */
-.city-input {
-    font-size: 1.4rem; /* Larger city input field */
-    padding: 12px;
+.weather-map img {
     width: 100%;
-    border: 2px solid #1abc9c; /* Green border */
+    height: auto;
+    border: 2px solid #fff; /* Optional: Add a border */
+}
+
+/* Heading */
+h1 {
+    color: #00bfff; /* Blue color for the heading */
+}
+
+/* Weather Info */
+.weather-info {
+    margin-top: 20px;
+}
+
+/* Temperature */
+.temperature {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+/* Air Quality */
+.air-quality {
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
+
+/* Input and Button */
+.city-input {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: none;
     border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    margin-right: 10px;
 }
 
 .submit-button {
-    font-size: 1rem; /* Smaller submit button */
     padding: 10px 20px;
-    background-color: #3498db; /* Blue button */
-    color: white;
+    font-size: 1.2rem;
+    background-color: #50fa7b; /* Bright green button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-}
-
-/* Weather Icon */
-.weather-icon {
-    width: 120px;
-    margin: 20px auto;
-    animation: float 3s ease-in-out infinite;
-}
-
-/* Message Style */
-.message {
-    font-style: italic;
-    font-size: 1.2rem;
-    color: #74b9ff; /* Light blue for the message */
-}
-
-/* Footer */
-.footer {
-    font-size: 0.9rem;
-    margin-top: 20px;
-    color: rgba(255, 255, 255, 0.7);
-    animation: fadeIn 2s ease-in-out;
+    background-color: #4af600; /* Darker green on hover */
 }
 
 /* Animations */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes bounceIn {
-    0% {
-        transform: scale(0.95);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        text-shadow: 0 0 10px #8be9fd, 0 0 20px #34e89e, 0 0 30px #0f3443;
-    }
-    100% {
-        text-shadow: 0 0 10px #34e89e, 0 0 20px #0f3443, 0 0 30px #8be9fd;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

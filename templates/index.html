@@ -7,66 +7,77 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="weather-container">
-        <!-- Main Heading for Weather Info -->
-        <h1>Weather Info</h1>
-
-        <!-- Weather Icon -->
-        <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
-
-        <!-- Input Field for City Name and Submit Button -->
-        <form method="POST" action="/">
-            <input type="text" name="city" placeholder="Enter City" required class="city-input">
-            <button type="submit" class="submit-button">Get Weather</button>
-        </form>
-
-        <!-- Weather Information Section -->
-        <div class="weather-info">
-            {% if weather and weather.temp is not none %}
-                <p class="temperature">{{ weather.temp }}°C</p>
-                <p class="humidity">Humidity: {{ weather.humidity }}%</p>
-                <p class="description">Weather: {{ weather.description }}</p>
-                <p class="conditions">Condition: {{ weather.condition }}</p> <!-- New weather condition added -->
-            {% else %}
-                <!-- Message to prompt users to enter a city -->
-                <p class="message">Please enter the city name to get weather data.</p>
-            {% endif %}
+    <div class="main-container">
+        <div class="widget-container">
+            <div id="openweathermap-widget-11"></div>
         </div>
 
-        <!-- Footer Section -->
-        <div class="footer">
-            Powered by OpenWeatherMap
+        <div class="weather-container">
+            <h1>Weather Info</h1>
+            <form method="POST" action="/" onsubmit="getWeatherMap();">
+                <input type="text" name="city" placeholder="Enter City" required class="city-input">
+                <button type="submit" class="submit-button">Get Weather</button>
+            </form>
+
+            <div class="weather-info">
+                {% if weather and weather.temp is not none %}
+                    <p class="temperature">{{ weather.temp }}°C</p>
+                    <p class="humidity">Humidity: {{ weather.humidity }}%</p>
+                    <p class="description">Weather: {{ weather.description }}</p>
+                    <p class="conditions">Condition: {{ weather.condition }}</p>
+                    <p class="coordinates">Coordinates: {{ weather.coord.lat }}, {{ weather.coord.lon }}</p>
+                    <p class="air-quality">Air Quality Index: {{ air_quality.aqi if air_quality else 'No AQI data available' }}</p>
+                {% else %}
+                    <p class="message">Please enter the city name to get weather data.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="weather-map">
+            <img id="weatherMap" src="" alt="Weather Map" />
         </div>
     </div>
 
-    <!-- Weather Widget -->
-    <div id="openweathermap-widget-11" class="weather-widget"></div>
-
-    <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+    <script src="//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js"></script>
     <script>
-        function loadWidget(cityId) {
-            window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-            window.myWidgetParam.push({
-                id: 11,
-                cityid: cityId,
-                appid: '50109a24ba32ed4b775a064f1fb11237',
-                units: 'metric',
-                containerid: 'openweathermap-widget-11',
-            });
-            (function() {
-                var script = document.createElement('script');
-                script.async = true;
-                script.charset = "utf-8";
-                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(script, s);
-            })();
-        }
+        window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  
+        window.myWidgetParam.push({
+            id: 11,
+            cityid: '1731214',
+            appid: '50109a24ba32ed4b775a064f1fb11237',
+            units: 'metric',
+            containerid: 'openweathermap-widget-11',
+        });  
+        (function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.charset = "utf-8";
+            script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(script, s);
+        })();
 
-        // Call loadWidget only if city_id is available
-        {% if city_id %}
-            loadWidget('{{ city_id }}');
-        {% endif %}
+        function getWeatherMap() {
+            const city = document.querySelector('input[name="city"]').value;
+            const apiKey = '50109a24ba32ed4b775a064f1fb11237';
+            const geoUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+            
+            fetch(geoUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const lat = data.coord.lat;
+                    const lon = data.coord.lon;
+                    const layer = 'clouds'; // Change this to your desired layer (e.g., 'rain', 'snow', etc.)
+                    const z = 10; // Zoom level
+                    const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
+                    const y = Math.floor((1 - (Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI)) / 2 * Math.pow(2, z));
+
+                    // Update the map image source
+                    const mapUrl = `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${apiKey}`;
+                    document.getElementById('weatherMap').src = mapUrl;
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
+        }
     </script>
 </body>
 </html>

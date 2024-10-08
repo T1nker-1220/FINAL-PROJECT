@@ -12,21 +12,26 @@ api_key = "50109a24ba32ed4b775a064f1fb11237"
 @app.route('/', methods=['GET', 'POST'])
 def home():
     weather_data = {}
-    air_pollution_data = {}
+    air_quality_data = {}
+    city_id = None  # Initialize city_id variable
+
     if request.method == 'POST':
         # Get city name from the form input
         city = request.form['city']
         # Fetch weather data for the city
         weather_data = get_weather(city)
 
-        # If weather data is found, fetch air pollution data
+        # Get the city ID from the weather data for the widget
         if weather_data:
-            latitude = weather_data.get('lat')
-            longitude = weather_data.get('lon')
-            air_pollution_data = get_air_pollution(latitude, longitude)
+            city_id = weather_data.get('id')  # Get the city ID
 
-    # Render the HTML template with weather and air pollution data
-    return render_template('index.html', weather=weather_data, air_pollution=air_pollution_data)
+            # Optional: Fetch air quality data based on coordinates
+            lat = weather_data['coord']['lat']
+            lon = weather_data['coord']['lon']
+            air_quality_data = get_air_quality(lat, lon)
+
+    # Render the HTML template with weather data
+    return render_template('index.html', weather=weather_data, air_pollution=air_quality_data, city_id=city_id)
 
 # Function to fetch weather data from the OpenWeatherMap API
 def get_weather(city):
@@ -46,33 +51,25 @@ def get_weather(city):
             'humidity': data.get('main', {}).get('humidity', 'No humidity data available'),
             'description': data.get('weather', [{}])[0].get('description', 'No weather description available'),
             'condition': 'Raining' if 'rain' in data else 'Clear' if 'clear' in data['weather'][0]['description'].lower() else 'Cloudy',
-            'lat': data['coord']['lat'],  # Latitude for air pollution API
-            'lon': data['coord']['lon']   # Longitude for air pollution API
+            'id': data['id'],  # Store the city ID
+            'coord': data['coord']  # Store coordinates for air quality
         }
 
-        # Print the JSON response for debugging (optional)
-        print(json.dumps(data, indent=4))
         return weather
     else:
-        # Return an empty dictionary if the API request fails
         return {}
 
-# Function to fetch air pollution data from the OpenWeatherMap API
-def get_air_pollution(lat, lon):
+# Function to fetch air quality data
+def get_air_quality(lat, lon):
     complete_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    
-    # Send a GET request to the API
     response = requests.get(complete_url)
 
-    # If the response is OK (200), process the data
     if response.status_code == 200:
         data = response.json()
-        air_pollution = {
-            'aqi': data.get('list', [{}])[0].get('main', {}).get('aqi', 'No AQI data available')
+        return {
+            'aqi': data['list'][0]['main']['aqi']
         }
-        return air_pollution
-    else:
-        return {}
+    return {}
 
 # Run the Flask app in debug mode
 if __name__ == '__main__':

@@ -8,14 +8,49 @@
 </head>
 <body>
     <div class="weather-container">
+        <!-- Main Heading for Weather Info -->
         <h1>Weather Info</h1>
+
+        <!-- Weather Icon -->
         <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
+        <!-- Input Field for City Name and Submit Button -->
         <form method="POST" action="/">
             <input type="text" name="city" placeholder="Enter City" required class="city-input">
             <button type="submit" class="submit-button">Get Weather</button>
         </form>
 
+        <!-- Weather Widget -->
+        <div id="openweathermap-widget-11" class="weather-widget"></div>
+
+        <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+        <script>
+            function loadWidget(cityId) {
+                window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+                window.myWidgetParam.push({
+                    id: 11,
+                    cityid: cityId,
+                    appid: '50109a24ba32ed4b775a064f1fb11237',
+                    units: 'metric',
+                    containerid: 'openweathermap-widget-11',
+                });
+                (function() {
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.charset = "utf-8";
+                    script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(script, s);
+                })();
+            }
+
+            // Call loadWidget only if city_id is available
+            {% if city_id %}
+                loadWidget('{{ city_id }}');
+            {% endif %}
+        </script>
+
+        <!-- Weather Information Section -->
         <div class="weather-info">
             {% if weather and weather.temp is not none %}
                 <p class="temperature">{{ weather.temp }}°C</p>
@@ -28,22 +63,7 @@
             {% endif %}
         </div>
 
-        <!-- New Air Quality Information Section -->
-        <div class="air-quality-info">
-            {% if air_quality and air_quality.aqi is not none %}
-                <h2>Air Quality Info</h2>
-                <p>AQI: {{ air_quality.aqi }}</p>
-                <p>PM2.5: {{ air_quality.pm2_5 }} µg/m³</p>
-                <p>PM10: {{ air_quality.pm10 }} µg/m³</p>
-                <p>NO2: {{ air_quality.no2 }} µg/m³</p>
-                <p>SO2: {{ air_quality.so2 }} µg/m³</p>
-                <p>O3: {{ air_quality.o3 }} µg/m³</p>
-                <p>CO: {{ air_quality.co }} µg/m³</p>
-            {% else %}
-                <p class="message">Air quality data is not available.</p>
-            {% endif %}
-        </div>
-
+        <!-- Footer Section -->
         <div class="footer">
             Powered by OpenWeatherMap
         </div>

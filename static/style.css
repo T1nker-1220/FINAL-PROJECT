@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: linear-gradient(135deg, #2a5298, #1abc9c); /* Gradient with green and blue */
+    background-image: url('pexels-solyartphotos-14825208.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;

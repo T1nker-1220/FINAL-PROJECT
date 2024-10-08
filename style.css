@@ -1,0 +1,151 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-image: url('pexels-solyartphotos-14825208.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+/* Weather Container */
+.weather-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px); /* Stronger blur effect */
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Weather Info Heading */
+.weather-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8be9fd; /* Light blue for the heading */
+    animation: pulse 2s infinite;
+}
+
+/* Weather Info Paragraphs */
+.weather-info p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.temperature {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #34e89e, #0f3443); /* Green and blue gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bounceIn 2s ease-in-out;
+}
+
+/* Input and Submit Button Styles */
+.city-input {
+    font-size: 1.4rem; /* Larger city input field */
+    padding: 12px;
+    width: 100%;
+    border: 2px solid #1abc9c; /* Green border */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.submit-button {
+    font-size: 1rem; /* Smaller submit button */
+    padding: 10px 20px;
+    background-color: #3498db; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Weather Icon */
+.weather-icon {
+    width: 120px;
+    margin: 20px auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Message Style */
+.message {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #74b9ff; /* Light blue for the message */
+}
+
+/* Footer */
+.footer {
+    font-size: 0.9rem;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 10px #8be9fd, 0 0 20px #34e89e, 0 0 30px #0f3443;
+    }
+    100% {
+        text-shadow: 0 0 10px #34e89e, 0 0 20px #0f3443, 0 0 30px #8be9fd;
+    }
+}

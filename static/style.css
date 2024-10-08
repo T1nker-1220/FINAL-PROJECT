@@ -20,6 +20,21 @@ body {
 
 }
 
+/* Weather Widget */
+.weather-widget {
+    width: 100%; /* Make the widget take full width */
+    max-width: 350px; /* Limit the width to give it a portrait feel */
+    margin: 20px auto; /* Center it horizontally in the available space */
+    display: flex; /* Use flexbox to align items */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align items to the left */
+    padding: 10px; /* Add some padding */
+    background: rgba(255, 255, 255, 0.2); /* Light background for the widget */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+
 /* Weather Container */
 .weather-container {
     background-color: rgba(2, 58, 1, 0.7); /* Dark transparent background */

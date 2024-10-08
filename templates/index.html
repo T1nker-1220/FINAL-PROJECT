@@ -4,39 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="weather-container">
-        <!-- Title for the weather information -->
-        <h1 class="weather-title">Weather Info</h1>
+        <!-- Main Heading for Weather Info -->
+        <h1>Weather Info</h1>
 
-        <!-- Weather Icon (e.g., for rain or sunny) -->
+        <!-- Weather Icon -->
         <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
-        <!-- Form to get the city name input from the user -->
+        <!-- Input Field for City Name and Submit Button -->
         <form method="POST" action="/">
-            <input type="text" name="city" placeholder="Enter City" required>
-            <!-- Submit button to fetch the weather -->
+            <input type="text" name="city" placeholder="Enter City" required class="city-input">
             <button type="submit" class="submit-button">Get Weather</button>
         </form>
 
-        <!-- Weather information display -->
+        <!-- Weather Information Section -->
         <div class="weather-info">
             {% if weather and weather.temp is not none %}
-                <!-- Display temperature, humidity, and description -->
                 <p class="temperature">{{ weather.temp }}°C</p>
                 <p class="humidity">Humidity: {{ weather.humidity }}%</p>
                 <p class="description">Weather: {{ weather.description }}</p>
-                <p class="condition">{{ weather.condition }}</p> <!-- Shows whether it's raining, sunny, etc. -->
+                <p class="conditions">Condition: {{ weather.condition }}</p> <!-- New weather condition added -->
             {% else %}
-                <!-- Message shown if no weather data is available yet -->
-                <p class="no-data">Please enter a city name to get weather data.</p>
+                <!-- Message to prompt users to enter a city -->
+                <p class="message">Please enter the city name to get weather data.</p>
             {% endif %}
         </div>
 
-        <!-- Footer with attribution to OpenWeatherMap -->
+        <!-- Footer Section -->
         <div class="footer">
             Powered by OpenWeatherMap
         </div>

@@ -1,4 +1,4 @@
-/* Basic styling reset */
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,104 +6,107 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Background image for the body */
 body {
-    background-image: url('pexels-solyartphotos-14825208.jpg'); /* Background image file */
-    background-size: cover; /* Make the image cover the entire screen */
-    background-position: center; /* Center the background image */
+    background-image: linear-gradient(135deg, #2a5298, #1abc9c); /* Gradient with green and blue */
+    background-size: cover;
+    background-position: center;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff; /* White text color */
+    color: #fff;
     font-size: 18px;
-    overflow: hidden; /* Prevent overflow */
+    overflow: hidden;
 }
 
-/* Styling for the weather information container */
+/* Weather Container */
 .weather-container {
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    padding: 40px; /* Padding inside the container */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    backdrop-filter: blur(10px); /* Blurred background */
-    max-width: 450px; /* Max width of the container */
-    text-align: center; /* Center the text */
-    animation: fadeIn 1.5s ease-in-out; /* Animation when container loads */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px); /* Stronger blur effect */
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Styling for the "Weather Info" title */
-.weather-title {
-    font-size: 2.5rem; /* Large font size */
-    margin-bottom: 20px; /* Space below the title */
-    letter-spacing: 2px; /* Add space between letters */
-    text-transform: uppercase; /* Make the text uppercase */
-    background: linear-gradient(135deg, #3bc400, #05b9b0); /* Gradient color */
-    -webkit-background-clip: text; /* Clip background to text */
-    -webkit-text-fill-color: transparent; /* Transparent text with gradient background */
-    animation: pulse 2s infinite; /* Pulsing animation */
+/* Weather Info Heading */
+.weather-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8be9fd; /* Light blue for the heading */
+    animation: pulse 2s infinite;
 }
 
-/* Styling for the weather information paragraphs */
+/* Weather Info Paragraphs */
 .weather-info p {
-    margin: 10px 0; /* Vertical spacing between elements */
-    font-size: 1.2rem; /* Font size for info text */
+    margin: 10px 0;
+    font-size: 1.2rem;
 }
 
-/* Styling for the temperature */
 .temperature {
-    font-size: 4rem; /* Large font for temperature */
-    font-weight: bold; /* Bold font */
-    margin: 20px 0; /* Space around the temperature */
-    background: linear-gradient(135deg, #027cbd, #fad0c4); /* Gradient for text */
-    -webkit-background-clip: text; /* Clip background to text */
-    -webkit-text-fill-color: transparent; /* Transparent text with gradient background */
-    animation: bounceIn 2s ease-in-out; /* Animation when it appears */
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #34e89e, #0f3443); /* Green and blue gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bounceIn 2s ease-in-out;
 }
 
-/* Styling for the message when no weather data is available */
-.no-data {
-    font-size: 1.5rem; /* Larger font */
-    font-style: italic; /* Italic style */
-    color: #40d501; /* Pinkish text */
-    background: rgba(0, 0, 0, 0.4); /* Slightly transparent background */
-    padding: 10px; /* Padding around the text */
-    border-radius: 10px; /* Rounded corners */
+/* Input and Submit Button Styles */
+.city-input {
+    font-size: 1.4rem; /* Larger city input field */
+    padding: 12px;
+    width: 100%;
+    border: 2px solid #1abc9c; /* Green border */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
-/* Submit button styling */
 .submit-button {
-    margin-top: 5px; /* Space above the button */
-    padding: 5px 10px; /* Padding inside the button */
-    font-size: 1.2rem; /* Font size */
-    background-color: #00c34b; /* Button background color */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded button corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth background change */
+    font-size: 1rem; /* Smaller submit button */
+    padding: 10px 20px;
+    background-color: #3498db; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Change button color on hover */
 .submit-button:hover {
-    background-color: #6cd700;
+    background-color: #2980b9; /* Darker blue on hover */
 }
 
-/* Weather icon styling */
+/* Weather Icon */
 .weather-icon {
-    width: 100px; /* Size of the icon */
-    margin: 20px auto; /* Centered with margin */
-    animation: float 3s ease-in-out infinite; /* Floating animation */
+    width: 120px;
+    margin: 20px auto;
+    animation: float 3s ease-in-out infinite;
 }
 
-/* Footer styling */
+/* Message Style */
+.message {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #74b9ff; /* Light blue for the message */
+}
+
+/* Footer */
 .footer {
-    font-size: 0.9rem; /* Small font size */
-    margin-top: 20px; /* Space above the footer */
-    color: rgba(255, 255, 255, 0.7); /* Light text color */
-    animation: fadeIn 2s ease-in-out; /* Fade-in animation */
+    font-size: 0.9rem;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    animation: fadeIn 2s ease-in-out;
 }
 
-/* Fade-in animation */
+/* Animations */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -115,7 +118,6 @@ body {
     }
 }
 
-/* Bounce-in animation for temperature */
 @keyframes bounceIn {
     0% {
         transform: scale(0.95);
@@ -127,7 +129,6 @@ body {
     }
 }
 
-/* Floating animation for weather icon */
 @keyframes float {
     0% {
         transform: translateY(0);
@@ -140,12 +141,11 @@ body {
     }
 }
 
-/* Pulsing animation for the title */
 @keyframes pulse {
     0% {
-        text-shadow: 0 0 10px #fff, 0 0 20px #00b015, 0 0 30px #fad0c4;
+        text-shadow: 0 0 10px #8be9fd, 0 0 20px #34e89e, 0 0 30px #0f3443;
     }
     100% {
-        text-shadow: 0 0 10px #00af32, 0 0 20px #fad0c4, 0 0 30px #fff;
+        text-shadow: 0 0 10px #34e89e, 0 0 20px #0f3443, 0 0 30px #8be9fd;
     }
 }

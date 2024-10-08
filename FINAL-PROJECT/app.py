@@ -1,8 +1,8 @@
 import json
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, url_for
 import requests
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='static')
 
 # Your OpenWeatherMap API key
 api_key = "50109a24ba32ed4b775a064f1fb11237"

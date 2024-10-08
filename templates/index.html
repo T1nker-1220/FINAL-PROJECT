@@ -15,42 +15,10 @@
         <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
         <!-- Input Field for City Name and Submit Button -->
-        <!-- Input Field for City Name and Submit Button -->
-<form method="POST" action="/">
-    <input type="text" name="city" placeholder="Enter City" required class="city-input">
-    <button type="submit" class="submit-button">Get Weather</button>
-</form>
-
-<!-- Weather Widget -->
-<div id="openweathermap-widget-11" class="weather-widget"></div>
-
-<script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
-<script>
-    function loadWidget(cityId) {
-        window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-        window.myWidgetParam.push({
-            id: 11,
-            cityid: cityId,
-            appid: '50109a24ba32ed4b775a064f1fb11237',
-            units: 'metric',
-            containerid: 'openweathermap-widget-11',
-        });
-        (function() {
-            var script = document.createElement('script');
-            script.async = true;
-            script.charset = "utf-8";
-            script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(script, s);
-        })();
-    }
-
-    // Call loadWidget only if city_id is available
-    {% if city_id %}
-        loadWidget('{{ city_id }}');
-    {% endif %}
-</script>
-
+        <form method="POST" action="/">
+            <input type="text" name="city" placeholder="Enter City" required class="city-input">
+            <button type="submit" class="submit-button">Get Weather</button>
+        </form>
 
         <!-- Weather Information Section -->
         <div class="weather-info">
@@ -58,9 +26,9 @@
                 <p class="temperature">{{ weather.temp }}°C</p>
                 <p class="humidity">Humidity: {{ weather.humidity }}%</p>
                 <p class="description">Weather: {{ weather.description }}</p>
-                <p class="conditions">Condition: {{ weather.condition }}</p>
-                <p class="air-quality">Air Quality Index (AQI): {{ air_pollution.aqi }}</p>
+                <p class="conditions">Condition: {{ weather.condition }}</p> <!-- New weather condition added -->
             {% else %}
+                <!-- Message to prompt users to enter a city -->
                 <p class="message">Please enter the city name to get weather data.</p>
             {% endif %}
         </div>
@@ -70,5 +38,35 @@
             Powered by OpenWeatherMap
         </div>
     </div>
+
+    <!-- Weather Widget -->
+    <div id="openweathermap-widget-11" class="weather-widget"></div>
+
+    <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+    <script>
+        function loadWidget(cityId) {
+            window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+            window.myWidgetParam.push({
+                id: 11,
+                cityid: cityId,
+                appid: '50109a24ba32ed4b775a064f1fb11237',
+                units: 'metric',
+                containerid: 'openweathermap-widget-11',
+            });
+            (function() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.charset = "utf-8";
+                script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(script, s);
+            })();
+        }
+
+        // Call loadWidget only if city_id is available
+        {% if city_id %}
+            loadWidget('{{ city_id }}');
+        {% endif %}
+    </script>
 </body>
 </html>

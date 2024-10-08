@@ -12,19 +12,31 @@ body {
     background-position: center;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Align children to the start (left) */
     align-items: center;
     color: #fff;
     font-size: 18px;
-    overflow: hidden; /* Prevents body from scrolling */
+    overflow: hidden;
+}
 
+/* Weather Container */
+.weather-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px); /* Stronger blur effect */
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+    margin-left: 20px; /* Add some margin to the left for spacing */
 }
 
 /* Weather Widget */
 .weather-widget {
     width: 100%; /* Make the widget take full width */
     max-width: 350px; /* Limit the width to give it a portrait feel */
-    margin: 20px auto; /* Center it horizontally in the available space */
+    margin-left: 20px; /* Move the widget to the left of the container */
     display: flex; /* Use flexbox to align items */
     flex-direction: column; /* Stack children vertically */
     align-items: flex-start; /* Align items to the left */
@@ -34,28 +46,13 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
-
-/* Weather Container */
-.weather-container {
-    background-color: rgba(2, 58, 1, 0.7); /* Dark transparent background */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(2, 58, 1, 0.7);
-    backdrop-filter: blur(15px); /* Stronger blur effect */
-    max-width: 450px;
-    max-height: 90vh; /* Set a max height for the container */
-    overflow-y: auto; /* Make the container scrollable vertically */
-    text-align: center;
-    animation: fadeIn 1.5s ease-in-out;
-}
-
 /* Weather Info Heading */
 .weather-container h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #1edf6b; /* Light blue for the heading */
+    color: #8be9fd; /* Light blue for the heading */
     animation: pulse 2s infinite;
 }
 
@@ -114,13 +111,6 @@ body {
     font-style: italic;
     font-size: 1.2rem;
     color: #74b9ff; /* Light blue for the message */
-}
-
-.air-quality-info {
-    margin-top: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
 }
 
 /* Footer */

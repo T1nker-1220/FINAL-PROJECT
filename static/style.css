@@ -16,17 +16,20 @@ body {
     align-items: center;
     color: #fff;
     font-size: 18px;
-    overflow: hidden;
+    overflow: hidden; /* Prevents body from scrolling */
+
 }
 
 /* Weather Container */
 .weather-container {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    background-color: rgba(2, 58, 1, 0.7); /* Dark transparent background */
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 30px rgba(2, 58, 1, 0.7);
     backdrop-filter: blur(15px); /* Stronger blur effect */
     max-width: 450px;
+    max-height: 90vh; /* Set a max height for the container */
+    overflow-y: auto; /* Make the container scrollable vertically */
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
 }
@@ -37,7 +40,7 @@ body {
     margin-bottom: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #8be9fd; /* Light blue for the heading */
+    color: #1edf6b; /* Light blue for the heading */
     animation: pulse 2s infinite;
 }
 

@@ -8,32 +8,41 @@
 </head>
 <body>
     <div class="weather-container">
-        <!-- Main Heading for Weather Info -->
         <h1>Weather Info</h1>
-
-        <!-- Weather Icon -->
         <img src="{{ url_for('static', filename='R.png') }}" alt="Weather Icon" class="weather-icon">
 
-        <!-- Input Field for City Name and Submit Button -->
         <form method="POST" action="/">
             <input type="text" name="city" placeholder="Enter City" required class="city-input">
             <button type="submit" class="submit-button">Get Weather</button>
         </form>
 
-        <!-- Weather Information Section -->
         <div class="weather-info">
             {% if weather and weather.temp is not none %}
                 <p class="temperature">{{ weather.temp }}°C</p>
                 <p class="humidity">Humidity: {{ weather.humidity }}%</p>
                 <p class="description">Weather: {{ weather.description }}</p>
-                <p class="conditions">Condition: {{ weather.condition }}</p> <!-- New weather condition added -->
+                <p class="conditions">Condition: {{ weather.condition }}</p>
             {% else %}
-                <!-- Message to prompt users to enter a city -->
                 <p class="message">Please enter the city name to get weather data.</p>
             {% endif %}
         </div>
 
-        <!-- Footer Section -->
+        <!-- New Air Quality Information Section -->
+        <div class="air-quality-info">
+            {% if air_quality and air_quality.aqi is not none %}
+                <h2>Air Quality Info</h2>
+                <p>AQI: {{ air_quality.aqi }}</p>
+                <p>PM2.5: {{ air_quality.pm2_5 }} µg/m³</p>
+                <p>PM10: {{ air_quality.pm10 }} µg/m³</p>
+                <p>NO2: {{ air_quality.no2 }} µg/m³</p>
+                <p>SO2: {{ air_quality.so2 }} µg/m³</p>
+                <p>O3: {{ air_quality.o3 }} µg/m³</p>
+                <p>CO: {{ air_quality.co }} µg/m³</p>
+            {% else %}
+                <p class="message">Air quality data is not available.</p>
+            {% endif %}
+        </div>
+
         <div class="footer">
             Powered by OpenWeatherMap
         </div>

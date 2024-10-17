@@ -52,7 +52,7 @@ body {
     font-weight: bold;
     margin: 20px 0;
     background: linear-gradient(135deg, #34e89e, #0f3443); /* Green and blue gradient text */
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: bounceIn 2s ease-in-out;
 }

@@ -38,7 +38,6 @@ def get_weather(city):
             'temp': data.get('main', {}).get('temp', 'No temperature data available'),
             'humidity': data.get('main', {}).get('humidity', 'No humidity data available'),
             'description': data.get('weather', [{}])[0].get('description', 'No weather description available'),
-            'condition': 'Raining' if 'rain' in data else 'Clear' if 'clear' in data['weather'][0]['description'].lower() else 'Cloudy'
         }
 
         # Print the JSON response for debugging (optional)
